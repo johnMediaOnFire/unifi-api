@@ -360,3 +360,10 @@ class Controller:
         js = {'mac': guest_mac}
 
         return self._run_command(cmd, params=js)
+
+    def alias(self, user, name):
+        if 'user_id' in user:
+            user = user['user_id']
+        js = json.dumps({'name': name})
+        params = urllib.urlencode({'json': js})
+        return self._read(self.api_url + 'upd/user/' + user, params)
