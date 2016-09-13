@@ -71,6 +71,7 @@ class Controller:
     def __del__(self):
         if self.session != None:
             self._logout()
+        self.session = None
 
     def _jsondec(self, data):
         obj = json.loads(data)
