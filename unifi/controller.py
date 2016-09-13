@@ -88,7 +88,9 @@ class Controller:
 
     def _write(self, url, json=None):
         res = self.session.post(url, json=json)
-        return self._jsondec(res.text)
+        if 'application/json' in res.headers['content-type']:
+            return self._jsondec(res.text)
+        return None
 
     def _construct_api_path(self, version):
         """Returns valid base API path based on version given
